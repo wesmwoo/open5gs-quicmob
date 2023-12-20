@@ -1,5 +1,10 @@
 <p align="center"><a href="https://open5gs.org" target="_blank" rel="noopener noreferrer"><img width="100" src="https://open5gs.org/assets/img/open5gs-logo-only.png" alt="Open5GS logo"></a></p>
 
+## Modifications to the Open5GS codebase
+The goal of this project is to remove mobility support from the LTE core. To achieve this, we need two things:
+1. Disable packet buffering during handover. This change is made in the mme/s1ap-handler.c file. TODO - test this on a local testbed
+2. Remove routing from a base station in the RAN to the S-GW and P-GW in the core. This is difficult to achieve without adding additional messaging, so for now we will simulate this by changing the public IP address of the UE on every handover.
+
 ## Getting Started
 
 Please follow the [documentation](https://open5gs.org/open5gs/docs/) at [open5gs.org](https://open5gs.org/)!

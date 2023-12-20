@@ -3200,15 +3200,20 @@ void s1ap_handle_handover_request_ack(
     OGS_ASN_STORE_DATA(&mme_ue->container,
             Target_ToSource_TransparentContainer);
 
-    if (mme_ue_have_indirect_tunnel(mme_ue) == true) {
-        ogs_assert(OGS_OK ==
-            mme_gtp_send_create_indirect_data_forwarding_tunnel_request(mme_ue)\
-        );
-    } else {
-        r = s1ap_send_handover_command(source_ue);
-        ogs_expect(r == OGS_OK);
-        ogs_assert(r != OGS_ERROR);
-    }
+    // Do not create indirect data forwarding tunnel -- just send the handover command
+    r = s1ap_send_handover_command(source_ue);
+    ogs_expect(r == OGS_OK);
+    ogs_assert(r != OGS_ERROR);
+
+    // if (mme_ue_have_indirect_tunnel(mme_ue) == true) {
+    //     ogs_assert(OGS_OK ==
+    //         mme_gtp_send_create_indirect_data_forwarding_tunnel_request(mme_ue)\
+    //     );
+    // } else {
+    //     r = s1ap_send_handover_command(source_ue);
+    //     ogs_expect(r == OGS_OK);
+    //     ogs_assert(r != OGS_ERROR);
+    // }
 }
 
 void s1ap_handle_handover_failure(mme_enb_t *enb, ogs_s1ap_message_t *message)
